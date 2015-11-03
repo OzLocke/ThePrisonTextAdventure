@@ -39,7 +39,7 @@ public class GuideController : MonoBehaviour {
 			StartCoroutine(TimedText("The bed you're lying on has a sheet on it but it's kind of... mouldy.\n", 6.0F));
 			StartCoroutine(TimedText("Uh... nothing else here but a broken mirrror and...\n", 9.0F));
 			StartCoroutine(TimedText("And the door, I guess. But it's locked so why count it, right?\n", 10.5F));
-			StartCoroutine(TimedText("Right?", 13.5F));
+			StartCoroutine(TimedText("Right?", 12.5F));
 			break;
 			//------------------------------------------------------
 			//--------------------IN-CELL STATES--------------------
@@ -57,6 +57,13 @@ public class GuideController : MonoBehaviour {
 			break;
 		case 7:
 			GuideText.text = "Yup, still in the cell.\n";
+			break;
+		case 8:
+			GuideText.text = "You still have the sheet.\n";
+			StartCoroutine(TimedText("Come on, if there was anything else here I'd have told you.\n", 1.0F));
+			break;
+		case 9:
+			GuideText.text = "Still just the manky sheet. You want it?";
 			break;
 		}
 	}

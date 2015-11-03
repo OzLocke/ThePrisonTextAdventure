@@ -43,6 +43,14 @@ public class UIController : MonoBehaviour {
 			StartCoroutine(TimedText("Press <b>S</b> to inspect the Sheet\nPress <b>M</b> to inspect the Mirror\n" +
 			                         "Press <b>D</b> to inspect the Door", 1.0F));
 			break;
+		case 8:
+			UIText.text = "";
+			StartCoroutine(TimedText("--Press <b>Space</b> to leave the bed--", 1.5F));
+			break;
+		case 9:
+			UIText.text = "";
+			StartCoroutine(TimedText("Press <b>T</b> to take it\nPress <b>R</b> to return", 1.0F));
+			break;
 		}
 	}
 	
