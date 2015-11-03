@@ -47,7 +47,16 @@ public class GuideController : MonoBehaviour {
 		case 5:
 			GuideText.text = "Alright, yeah, you're standing... well done!\n";
 			StartCoroutine(TimedText("So yeah, the bed's got a nasty looking sheet on it.\n", 1.5F));
-			StartCoroutine(TimedText("I don't know why you'd want it, but I guess you could take it.\n\n\n", 2.5F));
+			StartCoroutine(TimedText("I don't know why you'd want it, but I guess you could take it.", 2.5F));
+			break;
+		case 6:
+			GuideText.text = "... ew.\n";
+			StartCoroutine(TimedText("What exactly are you planning on doing with that?\n", 1.0F));
+			StartCoroutine(TimedText("Though I guess you were sleeping on it just now.\n", 2.5F));
+			StartCoroutine(TimedText("Still though... ew.", 4.0F));
+			break;
+		case 7:
+			GuideText.text = "Yup, still in the cell.\n";
 			break;
 		}
 	}

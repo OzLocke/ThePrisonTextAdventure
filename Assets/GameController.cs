@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		CurrentState = States.Intro;	
-		Page = 1;
+		Page = 4;
 		Inventory = new string[,] {
 			{"Mouldy Sheet", "no"}
 			,{"Broken Glass", "no"}
@@ -55,6 +55,16 @@ public class GameController : MonoBehaviour {
 			UI.UITextOutput(5);
 			Guide.GuideTextOutput(5);
 			CurrentState = States.Bed;
+		} else if(Input.GetKeyUp(KeyCode.T) & CurrentState == States.Bed & Page == -1 & Inventory[0,1] == "no") {
+			StartCoroutine(DisablePaging(-1, 4.0F));
+			UI.UITextOutput(6);
+			Guide.GuideTextOutput(6);
+			Inventory[0,1] = "yes";			
+		} else if(Input.GetKeyUp(KeyCode.Space) & CurrentState == States.Bed & Page == -1 & Inventory[0,1] == "yes") {
+			StartCoroutine(DisablePaging(-1, 4.0F));
+			UI.UITextOutput(7);
+			Guide.GuideTextOutput(7);
+			CurrentState = States.Cell;
 		}
 	}
 	

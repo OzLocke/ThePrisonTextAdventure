@@ -12,15 +12,15 @@ public class UIController : MonoBehaviour {
 			//----------------------INTRO PAGES---------------------
 			//------------------------------------------------------
 		case 1:
-			StartCoroutine(TimedText("<b>--Press Space to wake up--</b>", 6.0F));
+			StartCoroutine(TimedText("--Press <b>Space</b> to wake up--", 6.0F));
 			break;
 		case 2:
 			UIText.text = "";
-			StartCoroutine(TimedText("<b>--Press Space to panic--</b>", 9.5F));
+			StartCoroutine(TimedText("--Press <b>Space</b> to panic--", 9.5F));
 			break;
 		case 3:
 			UIText.text = "";
-			StartCoroutine(TimedText( "<b>--Press Space to calm down--</b>", 6.5F));
+			StartCoroutine(TimedText( "--Press <b>Space</b> to calm down--", 6.5F));
 			break;
 			//------------------------------------------------------
 			//--------------------IN-CELL STATES--------------------
@@ -33,6 +33,15 @@ public class UIController : MonoBehaviour {
 		case 5:
 			UIText.text = "";
 			StartCoroutine(TimedText("Press <b>T</b> to take it\nPress <b>R</b> to return", 4.0F));
+			break;
+		case 6:
+			UIText.text = "";
+			StartCoroutine(TimedText("--Press <b>Space</b> to leave the bed--", 4.0F));
+			break;
+		case 7:
+			UIText.text = "";
+			StartCoroutine(TimedText("Press <b>S</b> to inspect the Sheet\nPress <b>M</b> to inspect the Mirror\n" +
+			                         "Press <b>D</b> to inspect the Door", 1.0F));
 			break;
 		}
 	}
