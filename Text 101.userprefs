@@ -1,0 +1,15 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GuideController.cs">
+    <Files>
+      <File FileName="Text 101.sln" Line="1" Column="1" />
+      <File FileName="Assets\GameController.cs" Line="12" Column="2" />
+      <File FileName="Assets\UIController.cs" Line="7" Column="1" />
+      <File FileName="Assets\GuideController.cs" Line="7" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
