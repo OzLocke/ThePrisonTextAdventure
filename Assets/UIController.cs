@@ -5,51 +5,43 @@ using System.Collections;
 public class UIController : MonoBehaviour {
 	public Text UIText;
 	
-	public void UITextOutput (int OutputKey) {
+	public void UITextOutput (int OutputKey, float WaitTime) {
 		
 		switch (OutputKey) {
-			//------------------------------------------------------
-			//----------------------INTRO PAGES---------------------
-			//------------------------------------------------------
+		
+		//------------------------------------------------------
+		//----------------------INTRO PAGES---------------------
+		//------------------------------------------------------
 		case 1:
-			StartCoroutine(TimedText("--Press <b>Space</b> to wake up--", 6.0F));
+			StartCoroutine(TimedText("--Press <b>Space</b> to wake up--", WaitTime));
 			break;
 		case 2:
 			UIText.text = "";
-			StartCoroutine(TimedText("--Press <b>Space</b> to panic--", 9.5F));
+			StartCoroutine(TimedText("--Press <b>Space</b> to panic--", WaitTime));
 			break;
 		case 3:
 			UIText.text = "";
-			StartCoroutine(TimedText( "--Press <b>Space</b> to calm down--", 6.5F));
+			StartCoroutine(TimedText( "--Press <b>Space</b> to calm down--", WaitTime));
 			break;
-			//------------------------------------------------------
-			//--------------------IN-CELL STATES--------------------
-			//------------------------------------------------------
+		
+		//------------------------------------------------------
+		//--------------------IN-CELL ACTIONS-------------------
+		//------------------------------------------------------
+		//++When in the cell
 		case 4:
 			UIText.text = "";
-			StartCoroutine(TimedText("Press <b>S</b> to inspect the Sheet\nPress <b>M</b> to inspect the Mirror\n" +
-										"Press <b>D</b> to inspect the Door", 14.0F));
+			StartCoroutine(TimedText("Press <b>B</b> to inspect the Bed\nPress <b>M</b> to inspect the Mirror\n" +
+			                         "Press <b>D</b> to inspect the Door", WaitTime));
 			break;
+		//++When at the Bed WITHOU the sheet in inventory
 		case 5:
 			UIText.text = "";
-			StartCoroutine(TimedText("Press <b>T</b> to take it\nPress <b>R</b> to return", 4.0F));
+			StartCoroutine(TimedText("Press <b>T</b> to take it\nPress <b>R</b> to return", WaitTime));
 			break;
+		//++When at the bed WITH the sheet in inventory
 		case 6:
 			UIText.text = "";
-			StartCoroutine(TimedText("--Press <b>Space</b> to leave the bed--", 4.0F));
-			break;
-		case 7:
-			UIText.text = "";
-			StartCoroutine(TimedText("Press <b>S</b> to inspect the Sheet\nPress <b>M</b> to inspect the Mirror\n" +
-			                         "Press <b>D</b> to inspect the Door", 1.0F));
-			break;
-		case 8:
-			UIText.text = "";
-			StartCoroutine(TimedText("--Press <b>Space</b> to leave the bed--", 1.5F));
-			break;
-		case 9:
-			UIText.text = "";
-			StartCoroutine(TimedText("Press <b>T</b> to take it\nPress <b>R</b> to return", 1.0F));
+			StartCoroutine(TimedText("--Press <b>Space</b> to leave the Bed--", WaitTime));
 			break;
 		}
 	}
