@@ -36,61 +36,74 @@ public class GameController : MonoBehaviour {
 		//------------------------------------------------------
 		if(CurrentState == States.Intro & Page == 1) {
 			StartCoroutine(DisablePaging(2, 6.0F));
-			UI.UITextOutput(1);
+			UI.UITextOutput(1, 6.0F);
 			Guide.GuideTextOutput(1);
-			
-		} else if(Input.GetKeyUp(KeyCode.Space) & CurrentState == States.Intro & Page == 2) {
+		}	
+		else if(Input.GetKeyUp(KeyCode.Space) & CurrentState == States.Intro & Page == 2) {
 			StartCoroutine(DisablePaging(3, 9.0F));
-			UI.UITextOutput(2);
+			UI.UITextOutput(2, 9.5F);
 			Guide.GuideTextOutput(2);
-			
-		} else if(Input.GetKeyUp(KeyCode.Space) & CurrentState == States.Intro & Page == 3) {
+		}	
+		else if(Input.GetKeyUp(KeyCode.Space) & CurrentState == States.Intro & Page == 3) {
 			StartCoroutine(DisablePaging(4, 6.0F));
-			UI.UITextOutput(3);
+			UI.UITextOutput(3, 6.5F);
 			Guide.GuideTextOutput(3);
+		}
 			
-		} else if(Input.GetKeyUp(KeyCode.Space) & CurrentState == States.Intro & Page == 4) {
-			StartCoroutine(DisablePaging(-1, 14.0F));
-			UI.UITextOutput(4);
-			Guide.GuideTextOutput(4);
-			CurrentState = States.Cell;
 		
 		//------------------------------------------------------
-		//--------------------IN-CELL STATES--------------------
+		//--------------------Initial Visits--------------------
 		//------------------------------------------------------
+		//++Initial introduction to the cell
+		else if(Input.GetKeyUp(KeyCode.Space) & CurrentState == States.Intro & Page == 4) {
+			StartCoroutine(DisablePaging(-1, 14.0F));
+			UI.UITextOutput(4, 14.0F);
+			Guide.GuideTextOutput(4);
+			CurrentState = States.Cell;
+			Visited[0,1] = "yes";
+		} 
 		//++Initial introduction to the bed
-		} else if(Input.GetKeyUp(KeyCode.S) & CurrentState == States.Cell & Page == -1 & Inventory[0,1] == "no" & Visited[1,1] == "no") {
+		else if(Input.GetKeyUp(KeyCode.B) & Visited[1,1] == "no") {
 			StartCoroutine(DisablePaging(-1, 4.0F));
-			UI.UITextOutput(5);
+			UI.UITextOutput(5, 4.0F);
 			Guide.GuideTextOutput(5);
 			CurrentState = States.Bed;
 			Visited[1,1] = "yes";
-		//++When taking the sheet
-		} else if(Input.GetKeyUp(KeyCode.T) & CurrentState == States.Bed & Page == -1 & Inventory[0,1] == "no") {
-			StartCoroutine(DisablePaging(-1, 4.0F));
-			UI.UITextOutput(6);
-			Guide.GuideTextOutput(6);
-			Inventory[0,1] = "yes";			
+		}
+			
+		//------------------------------------------------------
+		//-------------------Further Visits---------------------
+		//------------------------------------------------------		 
 		//++When returning to the cell
-		} else if(
-			(Input.GetKeyUp(KeyCode.Space) & Inventory[0,1] == "yes") | (Input.GetKeyUp(KeyCode.R) & Inventory[0,1] == "no") & 
-			CurrentState == States.Bed & Page == -1) {
+		else if((Input.GetKeyUp(KeyCode.Space) | Input.GetKeyUp(KeyCode.R)) & Visited[0,1] == "yes") {
 				StartCoroutine(DisablePaging(-1, 1.0F));
-				UI.UITextOutput(7);
+				UI.UITextOutput(4, 1.0F);
 				Guide.GuideTextOutput(7);
 				CurrentState = States.Cell;
+		} 
 		//++When returning to the bed WITH the sheet in inventory
-		} else if(Input.GetKeyUp(KeyCode.S) & CurrentState == States.Cell & Page == -1 & Inventory[0,1] == "yes") {
+		else if(Input.GetKeyUp(KeyCode.B) & Visited[1,1] == "yes" & Inventory[0,1] == "yes") {
 			StartCoroutine(DisablePaging(-1, 1.5F));
-			UI.UITextOutput(8);
+			UI.UITextOutput(6, 1.5F);
 			Guide.GuideTextOutput(8);
 			CurrentState = States.Bed;
-		//++When returning to the bed WITH the sheet in inventory
-		} else if(Input.GetKeyUp(KeyCode.S) & CurrentState == States.Cell & Page == -1 & Inventory[0,1] == "no" & Visited[1,1] == "yes") {
+		} 
+		//++When returning to the bed WITHOUT the sheet in inventory
+		else if(Input.GetKeyUp(KeyCode.B) & Visited[1,1] == "yes" & Inventory[0,1] == "no") {
 			StartCoroutine(DisablePaging(-1, 1.0F));
-			UI.UITextOutput(9);
+			UI.UITextOutput(5, 1.0F);
 			Guide.GuideTextOutput(9);
 			CurrentState = States.Bed;
+		}
+		//------------------------------------------------------
+		//----------------------Actions-------------------------
+		//------------------------------------------------------	
+		//++When taking the sheet
+		else if(Input.GetKeyUp(KeyCode.T) & CurrentState == States.Bed & Inventory[0,1] == "no") {
+			StartCoroutine(DisablePaging(-1, 4.0F));
+			UI.UITextOutput(6, 4.0F);
+			Guide.GuideTextOutput(6);
+			Inventory[0,1] = "yes";	
 		}
 	}
 	
