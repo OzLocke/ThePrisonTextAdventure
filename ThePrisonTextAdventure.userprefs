@@ -1,10 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UIController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GameController.cs">
     <Files>
-      <File FileName="Assets\GameController.cs" Line="46" Column="5" />
-      <File FileName="Assets\GuideController.cs" Line="8" Column="44" />
-      <File FileName="Assets\UIController.cs" Line="11" Column="3" />
+      <File FileName="Assets\GameController.cs" Line="225" Column="1" />
+      <File FileName="Assets\GuideController.cs" Line="118" Column="1" />
+      <File FileName="Assets\UIController.cs" Line="16" Column="59" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

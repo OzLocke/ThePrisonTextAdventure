@@ -13,15 +13,15 @@ public class UIController : MonoBehaviour {
 		//----------------------INTRO PAGES---------------------
 		//------------------------------------------------------
 		case 1:
-			StartCoroutine(TimedText("--Press <b>Space</b> to wake up--", WaitTime));
+			StartCoroutine(TimedText("Press <b>Space</b> to wake up", WaitTime));
 			break;
 		case 2:
 			UIText.text = "";
-			StartCoroutine(TimedText("--Press <b>Space</b> to panic--", WaitTime));
+			StartCoroutine(TimedText("Press <b>Space</b> to panic", WaitTime));
 			break;
 		case 3:
 			UIText.text = "";
-			StartCoroutine(TimedText( "--Press <b>Space</b> to calm down--", WaitTime));
+			StartCoroutine(TimedText( "Press <b>Space</b> to calm down", WaitTime));
 			break;
 		
 		//------------------------------------------------------
@@ -33,7 +33,7 @@ public class UIController : MonoBehaviour {
 			StartCoroutine(TimedText("Press <b>B</b> to inspect the Bed\nPress <b>M</b> to inspect the Mirror\n" +
 			                         "Press <b>D</b> to inspect the Door", WaitTime));
 			break;
-		//++When at the Bed WITHOU the sheet in inventory
+		//++When at the Bed WITHOUT the sheet in inventory
 		case 5:
 			UIText.text = "";
 			StartCoroutine(TimedText("Press <b>T</b> to take it\nPress <b>R</b> to return", WaitTime));
@@ -41,7 +41,20 @@ public class UIController : MonoBehaviour {
 		//++When at the bed WITH the sheet in inventory
 		case 6:
 			UIText.text = "";
-			StartCoroutine(TimedText("--Press <b>Space</b> to leave the Bed--", WaitTime));
+			StartCoroutine(TimedText("Press <b>Space</b> to return to the cell", WaitTime));
+			break;
+		//++When at the bed WITH the broken glass in inventory
+		case 7:
+			UIText.text = "";
+			StartCoroutine(TimedText("Press <b>A</b> to attack\nPress <b>R</b> to return", WaitTime));
+			break;
+		case 8:
+			UIText.text = "";
+			StartCoroutine(TimedText("Press <b>T</b> to take it\nPress <b>A</b> to attack\nPress <b>R</b> to return", WaitTime));
+			break;
+		case 9:
+			UIText.text = "";
+			StartCoroutine(TimedText("Press <b>T</b> to take it\nPress <b>R</b> to return", WaitTime));
 			break;
 		}
 	}
