@@ -103,6 +103,13 @@ public class GameController : MonoBehaviour {
 			CurrentState = States.Mirror;
 			Visited[2,1] = "yes";
 		}
+		//++Initial introduction to the door WITHOUT the broken glass & WITHOUT the sheet
+		
+		//++Initial introduction to the door WITH the broken glass & WITH the sheet
+		
+		//++Initial introduction to the door WITHOUT the broken glass & WITH the sheet
+		
+		//++Initial introduction to the door WITH the broken glass & WITHOUT the sheet
 		
 		//------------------------------------------------------
 		//-------------------Further Visits---------------------
