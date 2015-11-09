@@ -27,11 +27,17 @@ public class UIController : MonoBehaviour {
 		//------------------------------------------------------
 		//--------------------IN-CELL ACTIONS-------------------
 		//------------------------------------------------------
-		//++When in the cell
+		//++When returning to the cell WITHOUT the sheet and/or WITHOUT the broken glass
 		case 4:
 			UIText.text = "";
 			StartCoroutine(TimedText("Press <b>B</b> to inspect the Bed\nPress <b>M</b> to inspect the Mirror\n" +
 			                         "Press <b>D</b> to inspect the Door", WaitTime));
+			break;
+		//++When returning to the cell WITH the sheet and WITH the broken glass
+		case 10:
+			UIText.text = "";
+			StartCoroutine(TimedText("Press <b>B</b> to inspect the Bed\nPress <b>M</b> to inspect the Mirror\n" +
+			                         "Press <b>D</b> to inspect the Door\nPress <b>C</b> to combine things", WaitTime));
 			break;
 		//++When at the Bed WITHOUT the sheet in inventory
 		case 5:
@@ -43,15 +49,17 @@ public class UIController : MonoBehaviour {
 			UIText.text = "";
 			StartCoroutine(TimedText("Press <b>Space</b> to return to the cell", WaitTime));
 			break;
-		//++When at the bed WITH the broken glass in inventory
+		//++When at the bed (WITH the broken glass and WITH the sheet) or WITH the shiv in inventory
 		case 7:
 			UIText.text = "";
 			StartCoroutine(TimedText("Press <b>A</b> to attack\nPress <b>R</b> to return", WaitTime));
 			break;
+		//++When at the bed WITH the broken glass and WITHOUT the sheet
 		case 8:
 			UIText.text = "";
 			StartCoroutine(TimedText("Press <b>T</b> to take it\nPress <b>A</b> to attack\nPress <b>R</b> to return", WaitTime));
 			break;
+		//++When at the bed WITHOUT the broken glass in inventory
 		case 9:
 			UIText.text = "";
 			StartCoroutine(TimedText("Press <b>T</b> to take it\nPress <b>R</b> to return", WaitTime));

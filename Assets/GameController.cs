@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour {
 		Inventory = new string[,] {
 			{"Mouldy Sheet", "no"}
 			,{"Broken Glass", "no"}
+			,{"Shiv", "no"}
 		};
 		Visited = new string[,] {
 			{"Cell", "no"}
@@ -114,15 +115,51 @@ public class GameController : MonoBehaviour {
 		//------------------------------------------------------
 		//-------------------Further Visits---------------------
 		//------------------------------------------------------		 
-		//++When returning to the cell
+		//++When returning to the cell WITHOUT the sheet and/or WITHOUT the broken glass
 		else if((Input.GetKeyUp(KeyCode.Space) | Input.GetKeyUp(KeyCode.R)) & 
 		        CurrentState != States.Cell &
-		        Visited[0,1] == "yes") {
+		        Visited[0,1] == "yes" &
+		        (
+		        Inventory[0,1] == "no" |
+		        Inventory[1,1] == "no"
+		        )) {
 			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
 			UI.UITextOutput(4, 1.0F / Speed);
 			Guide.GuideTextOutput(7, Speed);
 			CurrentState = States.Cell;
 		} 
+		//++When returning to the cell WITH the sheet and WITH the broken glass
+		else if((Input.GetKeyUp(KeyCode.Space) | Input.GetKeyUp(KeyCode.R)) & 
+		        CurrentState != States.Cell &
+		        Visited[0,1] == "yes" &
+		        Inventory[0,1] == "yes" &
+		        Inventory[1,1] == "yes") {
+			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
+			UI.UITextOutput(10, 1.0F / Speed);
+			Guide.GuideTextOutput(7, Speed);
+			CurrentState = States.Cell;
+		} 
+		//++When returning to the bed WITH the shiv in inventory
+		else if(Input.GetKeyUp(KeyCode.B) & 
+		        CurrentState != States.Bed &
+		        Visited[1,1] == "yes" & 
+		        Inventory[2,1] == "yes") {
+			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
+			UI.UITextOutput(7, 1.0F / Speed);
+			Guide.GuideTextOutput(16, Speed);
+			CurrentState = States.Bed;
+		}
+		//++When returning to the bed WITH the sheet & WITH the broken glass
+		else if(Input.GetKeyUp(KeyCode.B) & 
+		        CurrentState != States.Bed &
+		        Visited[1,1] == "yes" & 
+		        Inventory[0,1] == "yes" & 
+		        Inventory[1,1] == "yes") {
+			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
+			UI.UITextOutput(7, 1.0F / Speed);
+			Guide.GuideTextOutput(8, Speed);
+			CurrentState = States.Bed;
+		}
 		//++When returning to the bed WITH the sheet & WITHOUT the broken glass in inventory
 		else if(Input.GetKeyUp(KeyCode.B) & 
 		        CurrentState != States.Bed &
@@ -145,17 +182,6 @@ public class GameController : MonoBehaviour {
 			Guide.GuideTextOutput(9, Speed);
 			CurrentState = States.Bed;
 		}
-		//++When returning to the bed WITH the sheet & WITH the broken glass in inventory
-		else if(Input.GetKeyUp(KeyCode.B) & 
-		        CurrentState != States.Bed &
-		        Visited[1,1] == "yes" & 
-		        Inventory[0,1] == "yes" &
-		        Inventory[1,1] == "yes") {
-			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
-			UI.UITextOutput(7, 1.0F / Speed);
-			Guide.GuideTextOutput(8, Speed);
-			CurrentState = States.Bed;
-		}
 		//++When returning to the bed WITHOUT the sheet & WITH the broken glass in inventory
 		else if(Input.GetKeyUp(KeyCode.B) & 
 		        CurrentState != States.Bed &
@@ -171,7 +197,8 @@ public class GameController : MonoBehaviour {
 		else if(Input.GetKeyUp(KeyCode.M) & 
 		        CurrentState != States.Mirror &
 		        Visited[2,1] == "yes" &
-		        Inventory[1,1] == "no") {
+		        Inventory[1,1] == "no" &
+		        Inventory[2,1] == "no") {
 			StartCoroutine(DisablePaging(-1, 3.0F / Speed));
 			UI.UITextOutput(9, 3.0F / Speed);
 			Guide.GuideTextOutput(12, Speed);
@@ -181,12 +208,23 @@ public class GameController : MonoBehaviour {
 		else if(Input.GetKeyUp(KeyCode.M) & 
 		        CurrentState != States.Mirror &
 		        Visited[2,1] == "yes" &
-		        Inventory[1,1] == "yes") {
+		        (
+		        Inventory[1,1] == "yes" |
+		        Inventory[2,1] == "yes"
+		        )) {
 			StartCoroutine(DisablePaging(-1, 2.0F / Speed));
 			UI.UITextOutput(6, 2.0F / Speed);
 			Guide.GuideTextOutput(13, Speed);
 			CurrentState = States.Mirror;
 		}
+		//++Initial introduction to the door WITHOUT the broken glass & WITHOUT the sheet
+		
+		//++Initial introduction to the door WITH the broken glass & WITH the sheet
+		
+		//++Initial introduction to the door WITHOUT the broken glass & WITH the sheet
+		
+		//++Initial introduction to the door WITH the broken glass & WITHOUT the sheet
+		
 		//------------------------------------------------------
 		//----------------------Actions-------------------------
 		//------------------------------------------------------	
@@ -199,14 +237,6 @@ public class GameController : MonoBehaviour {
 			Guide.GuideTextOutput(6, Speed);
 			Inventory[0,1] = "yes";	
 		}
-		//++When attacking the bed
-		else if(Input.GetKeyUp(KeyCode.A) & 
-		        CurrentState == States.Bed & 
-		        Inventory[1,1] == "yes") {
-			StartCoroutine(DisablePaging(-1, 2.0F / Speed));
-			UI.UITextOutput(6, 2.0F / Speed);
-			Guide.GuideTextOutput(10, Speed);
-		}
 		//++When taking the broken glass
 		else if(Input.GetKeyUp(KeyCode.T) &
 		        CurrentState == States.Mirror &
@@ -216,6 +246,36 @@ public class GameController : MonoBehaviour {
 			Guide.GuideTextOutput(14, Speed); 
 			Inventory[1,1] = "yes";		
 		}
+		//++When attacking the bed with the broken glass
+		else if(Input.GetKeyUp(KeyCode.A) & 
+		        CurrentState == States.Bed & 
+		        Inventory[1,1] == "yes") {
+			StartCoroutine(DisablePaging(-1, 2.0F / Speed));
+			UI.UITextOutput(6, 2.0F / Speed);
+			Guide.GuideTextOutput(10, Speed);
+		}
+		//++When attacking the bed with the shiv
+		else if(Input.GetKeyUp(KeyCode.A) & 
+		        CurrentState == States.Bed & 
+		        Inventory[2,1] == "yes") {
+			StartCoroutine(DisablePaging(-1, 2.0F / Speed));
+			UI.UITextOutput(6, 2.0F / Speed);
+			Guide.GuideTextOutput(15, Speed);
+		}
+		//++When making the shiv
+		else if(Input.GetKeyUp(KeyCode.C) &
+				CurrentState == States.Cell &
+				Inventory[0,1] == "yes" &
+				Inventory[1,1] == "yes") {
+			StartCoroutine(DisablePaging(-1, 2.5F / Speed));
+			UI.UITextOutput(4, 2.5F / Speed);
+			Guide.GuideTextOutput(17, Speed);
+			Inventory[0,1] = "no";
+			Inventory[1,1] = "no";
+			Inventory[2,1] = "yes";
+					
+		}
+		
 	}
 	
 	//-------FUNCTIONS-------

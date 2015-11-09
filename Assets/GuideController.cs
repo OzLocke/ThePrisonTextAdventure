@@ -87,22 +87,37 @@ public class GuideController : MonoBehaviour {
 		case 9:
 			GuideText.text = "Still just the manky sheet. You want it?";
 			break;
-			
+		case 16:
+			GuideText.text = "You still have the sheet... in a way.";
+			break;	
 			//------------------------------------------------------
 			//----------------------Actions-------------------------
 			//------------------------------------------------------	
+		//++When taking the sheet
 		case 6:
 			GuideText.text = "... ew.\n";
 			StartCoroutine(TimedText("What exactly are you planning on doing with that?\n", 1.0F / Speed));
 			StartCoroutine(TimedText("Though I guess you were sleeping on it just now.\n", 2.5F / Speed));
 			StartCoroutine(TimedText("Still though... ew.", 4.0F / Speed));
 			break;
-		case 10:
-			GuideText.text = "Ok. You've stabbed the bed...\n";
-			StartCoroutine(TimedText("Feel better now?", 1.5F / Speed));
-			break;
+		//++When taking the broken glass
 		case 14:
 			GuideText.text = "You can grip it like a knife, but it'll cut your hand.";
+			break;
+		//++When attacking the bed with the broken glass
+		case 10:
+			GuideText.text = "Ok. You've stabbed the bed and now your hand is bleeding.\n";
+			StartCoroutine(TimedText("Was it worth it?", 1.5F / Speed));
+			break;
+		//++When attacking the bed with the shiv
+		case 15:
+			GuideText.text = "Hey, that shiv works nicely!\n";
+			StartCoroutine(TimedText("You... you can stop stabbing the bed now.", 1.5F / Speed));
+			break;
+		//++When making the shiv
+		case 17:
+			GuideText.text = "That's it, wrap the sheet around the glass.\n";
+			StartCoroutine(TimedText("Done. Boy that's a mean looking shiv!", 2.0F / Speed));
 			break;
 		}
 	}
