@@ -104,14 +104,17 @@ public class GameController : MonoBehaviour {
 			CurrentState = States.Mirror;
 			Visited[2,1] = "yes";
 		}
-		//++Initial introduction to the door WITHOUT the broken glass & WITHOUT the sheet
-		
-		//++Initial introduction to the door WITH the broken glass & WITH the sheet
-		
+		//++Initial introduction to the door WITHOUT the broken glass & WITHOUT the sheet and WITHOUT the shiv
+		//Pending
 		//++Initial introduction to the door WITHOUT the broken glass & WITH the sheet
-		
+		//Pending
 		//++Initial introduction to the door WITH the broken glass & WITHOUT the sheet
-		
+		//Pending
+		//++Initial introduction to the door WITH the broken glass & WITH the sheet
+		//Pending
+		//++Initial introduction to the door WITH the shiv
+		//Pending
+				
 		//------------------------------------------------------
 		//-------------------Further Visits---------------------
 		//------------------------------------------------------		 
@@ -217,13 +220,16 @@ public class GameController : MonoBehaviour {
 			Guide.GuideTextOutput(13, Speed);
 			CurrentState = States.Mirror;
 		}
-		//++Initial introduction to the door WITHOUT the broken glass & WITHOUT the sheet
-		
-		//++Initial introduction to the door WITH the broken glass & WITH the sheet
-		
-		//++Initial introduction to the door WITHOUT the broken glass & WITH the sheet
-		
-		//++Initial introduction to the door WITH the broken glass & WITHOUT the sheet
+		//++Returning to the door WITHOUT the broken glass & WITHOUT the sheet and WITHOUT the shiv
+		//Pending
+		//++Returning to the door WITHOUT the broken glass & WITH the sheet
+		//Pending
+		//++Returning to the door WITH the broken glass & WITHOUT the sheet
+		//Pending
+		//++Returning to the door WITH the broken glass & WITH the sheet
+		//Pending
+		//++Returning to the door WITH the shiv
+		//Pending
 		
 		//------------------------------------------------------
 		//----------------------Actions-------------------------
@@ -273,8 +279,17 @@ public class GameController : MonoBehaviour {
 			Inventory[0,1] = "no";
 			Inventory[1,1] = "no";
 			Inventory[2,1] = "yes";
-					
 		}
+		//++When trying the door handle
+		//Pending
+		//++When looking through the bars
+		//Pending
+		//++When using the sheet on the door
+		//Pending
+		//++When using the broken glass on the door
+		//Pending
+		//++When using the shiv on the door
+		//Pending
 		
 	}
 	
