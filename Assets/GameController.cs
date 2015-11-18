@@ -5,19 +5,20 @@ using System.Collections;
 public class GameController : MonoBehaviour {
 	public UIController UI;
 	public GuideController Guide;
-	public enum States {Intro, Cell, Mirror, Bed, Door};
+	public enum States {Intro, Cell, Mirror, Bed, Door, Corridor, Ending, End};
 	public States CurrentState;
 	int Page;
 	float Speed;
 	string[,] Inventory;
 	string[,] Visited;
+	string GuardFacing;
 	
 	
 	// Use this for initialization
 	void Start () {
 		Speed = 2.0F;
 		CurrentState = States.Intro;	
-		Page = 1;
+		Page = -1;
 		Inventory = new string[,] {
 			{"Mouldy Sheet", "no"}
 			,{"Broken Glass", "no"}
@@ -29,6 +30,7 @@ public class GameController : MonoBehaviour {
 			,{"Mirror", "no"}
 			,{"Door", "no"}
 		};
+		GuardFacing = "away";
 	}
 	
 	// Update is called once per frame
@@ -104,16 +106,16 @@ public class GameController : MonoBehaviour {
 			CurrentState = States.Mirror;
 			Visited[2,1] = "yes";
 		}
-		//++Initial introduction to the door WITHOUT the broken glass & WITHOUT the sheet and WITHOUT the shiv
-		//Pending
-		//++Initial introduction to the door WITHOUT the broken glass & WITH the sheet
-		//Pending
-		//++Initial introduction to the door WITH the broken glass & WITHOUT the sheet
-		//Pending
-		//++Initial introduction to the door WITH the broken glass & WITH the sheet
-		//Pending
-		//++Initial introduction to the door WITH the shiv
-		//Pending
+		//++Initial introduction to the door
+		else if(Input.GetKeyUp(KeyCode.D) &
+				CurrentState != States.Door &
+				Visited[3,1] == "no" ) {
+			StartCoroutine(DisablePaging(-1, 5.5F / Speed));
+			UI.UITextOutput(11, 5.5F / Speed);
+			Guide.GuideTextOutput(18, Speed);
+			CurrentState = States.Door;
+			Visited[3,1] = "yes";		
+		}
 				
 		//------------------------------------------------------
 		//-------------------Further Visits---------------------
@@ -220,16 +222,15 @@ public class GameController : MonoBehaviour {
 			Guide.GuideTextOutput(13, Speed);
 			CurrentState = States.Mirror;
 		}
-		//++Returning to the door WITHOUT the broken glass & WITHOUT the sheet and WITHOUT the shiv
-		//Pending
-		//++Returning to the door WITHOUT the broken glass & WITH the sheet
-		//Pending
-		//++Returning to the door WITH the broken glass & WITHOUT the sheet
-		//Pending
-		//++Returning to the door WITH the broken glass & WITH the sheet
-		//Pending
-		//++Returning to the door WITH the shiv
-		//Pending
+		//++Returning to the door
+		else if(Input.GetKeyUp(KeyCode.D) &
+		        CurrentState != States.Door &
+		        Visited[3,1] == "yes" ) {
+			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
+			UI.UITextOutput(11, 1.0F / Speed);
+			Guide.GuideTextOutput(19, Speed);
+			CurrentState = States.Door;	
+		}
 		
 		//------------------------------------------------------
 		//----------------------Actions-------------------------
@@ -280,17 +281,121 @@ public class GameController : MonoBehaviour {
 			Inventory[1,1] = "no";
 			Inventory[2,1] = "yes";
 		}
-		//++When trying the door handle
-		//Pending
-		//++When looking through the bars
-		//Pending
-		//++When using the sheet on the door
-		//Pending
-		//++When using the broken glass on the door
-		//Pending
-		//++When using the shiv on the door
-		//Pending
-		
+		//++When pushing the door
+		else if(Input.GetKeyUp(KeyCode.P) &
+		        CurrentState == States.Door) {
+			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
+			UI.UITextOutput(11, 1.0F / Speed);
+			Guide.GuideTextOutput(20, Speed);
+		}
+		//++When attacking the door bare handed
+		else if(Input.GetKeyUp(KeyCode.A) &
+		        CurrentState == States.Door &
+		        Inventory[1,1] == "no" &
+		        Inventory[2,1] == "no") {
+			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
+			UI.UITextOutput(11, 1.0F / Speed);
+			Guide.GuideTextOutput(21, Speed);
+			GuardFacing = "towards";
+		}
+		//++When attacking the door with the broken glass
+		else if(Input.GetKeyUp(KeyCode.A) &
+		        CurrentState == States.Door &
+		        Inventory[1,1] == "yes") {
+			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
+			UI.UITextOutput(11, 1.0F / Speed);
+			Guide.GuideTextOutput(22, Speed);
+		}
+		//++When attacking the door with the shiv
+		else if(Input.GetKeyUp(KeyCode.A) &
+		        CurrentState == States.Door &
+		        Inventory[2,1] == "yes") {
+			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
+			UI.UITextOutput(11, 1.0F / Speed);
+			Guide.GuideTextOutput(23, Speed);
+		}
+		//++When yelling through the door
+		else if(Input.GetKeyUp(KeyCode.Y) &
+		        CurrentState == States.Door) {
+			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
+			UI.UITextOutput(11, 1.0F / Speed);
+			Guide.GuideTextOutput(24, Speed);
+			GuardFacing = "towards";
+		}
+		//++When trying the door handle and the guard is facing away
+		else if(Input.GetKeyUp(KeyCode.L) &
+		        CurrentState == States.Door &
+		        GuardFacing == "away") {
+			StartCoroutine(DisablePaging(-1, 3.5F / Speed));
+			UI.UITextOutput(12, 5.0F / Speed);
+			Guide.GuideTextOutput(25, Speed);
+			CurrentState = States.Corridor;
+		}
+		//++When trying the door handle and the guard is facing towards
+		else if(Input.GetKeyUp(KeyCode.L) &
+		        CurrentState == States.Door &
+		        GuardFacing == "towards") {
+			StartCoroutine(DisablePaging(-1, 3.5F / Speed));
+			UI.UITextOutput(13, 5.0F / Speed);
+			Guide.GuideTextOutput(26, Speed);
+			CurrentState = States.Corridor;
+		}
+		//++When attacking the guard WITH a weapon
+		else if(Input.GetKeyUp(KeyCode.A) &
+				CurrentState == States.Corridor &
+				(
+				Inventory[1,1] == "yes" |
+				Inventory[2,1] == "yes"
+				)) {
+			StartCoroutine(DisablePaging(4, 4.0F / Speed));
+			UI.UITextOutput(14, 0.0F);
+			Guide.GuideTextOutput(27, Speed);
+			CurrentState = States.Ending;
+		}
+		//++When attacking the guard WITHOUT a weapon
+		else if(Input.GetKeyUp(KeyCode.A) &
+		        CurrentState == States.Corridor &
+		        Inventory[1,1] == "no" &
+				Inventory[2,1] == "no") {
+			StartCoroutine(DisablePaging(4, 4.0F / Speed));
+			UI.UITextOutput(14, 0.0F);
+			Guide.GuideTextOutput(28, Speed);
+			CurrentState = States.Ending;
+		}
+		//++When talking to the guard while he's facing away
+		else if(Input.GetKeyUp(KeyCode.T) &
+		        CurrentState == States.Corridor &
+		        GuardFacing == "away") {
+			StartCoroutine(DisablePaging(4, 4.0F / Speed));
+			UI.UITextOutput(14, 0.0F);
+			Guide.GuideTextOutput(29, Speed);
+			CurrentState = States.Ending;
+		}
+		//++When talking to the guard when he's facing towards
+		else if(Input.GetKeyUp(KeyCode.A) &
+		        CurrentState == States.Corridor &
+		        GuardFacing == "towards") {
+			StartCoroutine(DisablePaging(4, 4.0F / Speed));
+			UI.UITextOutput(14, 0.0F);
+			Guide.GuideTextOutput(30, Speed);
+			CurrentState = States.Ending;
+		}
+		//++When sneaking passed the guard
+		else if(Input.GetKeyUp(KeyCode.S) &
+		        CurrentState == States.Corridor) {
+			StartCoroutine(DisablePaging(4, 4.0F / Speed));
+			UI.UITextOutput(14, 0.0F);
+			Guide.GuideTextOutput(31, Speed);
+			CurrentState = States.Ending;
+		}	
+		//++When running passed the guard
+		else if(Input.GetKeyUp(KeyCode.R) &
+		        CurrentState == States.Corridor) {
+			StartCoroutine(DisablePaging(4, 4.0F / Speed));
+			UI.UITextOutput(14, 0.0F);
+			Guide.GuideTextOutput(32, Speed);
+			CurrentState = States.Ending;    
+		}
 	}
 	
 	//-------FUNCTIONS-------
