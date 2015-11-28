@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour {
 	string[,] Inventory;
 	string[,] Visited;
 	string GuardFacing;
+	//Behvioural scores effect game ending.
+	//The scores are Violent and Smart [V,S]
+	int[] Score = new int[2];
 	
 	
 	// Use this for initialization
@@ -59,8 +62,6 @@ public class GameController : MonoBehaviour {
 			UI.UITextOutput(3, 6.5F / Speed);
 			Guide.GuideTextOutput(3, Speed);
 		}
-		
-		
 		//------------------------------------------------------
 		//--------------------Initial Visits--------------------
 		//------------------------------------------------------
@@ -243,6 +244,8 @@ public class GameController : MonoBehaviour {
 			UI.UITextOutput(6, 4.0F / Speed);
 			Guide.GuideTextOutput(6, Speed);
 			Inventory[0,1] = "yes";	
+			Score[0] += 0;
+			Score[1] += 1;
 		}
 		//++When taking the broken glass
 		else if(Input.GetKeyUp(KeyCode.T) &
@@ -251,7 +254,9 @@ public class GameController : MonoBehaviour {
 			StartCoroutine(DisablePaging(-1, 2.0F / Speed));
 			UI.UITextOutput(6, 2.0F / Speed);
 			Guide.GuideTextOutput(14, Speed); 
-			Inventory[1,1] = "yes";		
+			Inventory[1,1] = "yes";	
+			Score[0] += 1;
+			Score[1] += 1;		
 		}
 		//++When attacking the bed with the broken glass
 		else if(Input.GetKeyUp(KeyCode.A) & 
@@ -259,7 +264,9 @@ public class GameController : MonoBehaviour {
 		        Inventory[1,1] == "yes") {
 			StartCoroutine(DisablePaging(-1, 2.0F / Speed));
 			UI.UITextOutput(6, 2.0F / Speed);
-			Guide.GuideTextOutput(10, Speed);
+			Guide.GuideTextOutput(10, Speed);	
+			Score[0] += 1;
+			Score[1] += 0;
 		}
 		//++When attacking the bed with the shiv
 		else if(Input.GetKeyUp(KeyCode.A) & 
@@ -267,7 +274,9 @@ public class GameController : MonoBehaviour {
 		        Inventory[2,1] == "yes") {
 			StartCoroutine(DisablePaging(-1, 2.0F / Speed));
 			UI.UITextOutput(6, 2.0F / Speed);
-			Guide.GuideTextOutput(15, Speed);
+			Guide.GuideTextOutput(15, Speed);	
+			Score[0] += 1;
+			Score[1] += 1;
 		}
 		//++When making the shiv
 		else if(Input.GetKeyUp(KeyCode.C) &
@@ -279,14 +288,18 @@ public class GameController : MonoBehaviour {
 			Guide.GuideTextOutput(17, Speed);
 			Inventory[0,1] = "no";
 			Inventory[1,1] = "no";
-			Inventory[2,1] = "yes";
+			Inventory[2,1] = "yes";	
+			Score[0] += 1;
+			Score[1] += 2;
 		}
 		//++When pushing the door
 		else if(Input.GetKeyUp(KeyCode.P) &
 		        CurrentState == States.Door) {
 			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
 			UI.UITextOutput(11, 1.0F / Speed);
-			Guide.GuideTextOutput(20, Speed);
+			Guide.GuideTextOutput(20, Speed);	
+			Score[0] += 0;
+			Score[1] += 0;
 		}
 		//++When attacking the door bare handed
 		else if(Input.GetKeyUp(KeyCode.A) &
@@ -296,7 +309,9 @@ public class GameController : MonoBehaviour {
 			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
 			UI.UITextOutput(11, 1.0F / Speed);
 			Guide.GuideTextOutput(21, Speed);
-			GuardFacing = "towards";
+			GuardFacing = "towards";	
+			Score[0] += 2;
+			Score[1] += 0;
 		}
 		//++When attacking the door with the broken glass
 		else if(Input.GetKeyUp(KeyCode.A) &
@@ -304,7 +319,9 @@ public class GameController : MonoBehaviour {
 		        Inventory[1,1] == "yes") {
 			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
 			UI.UITextOutput(11, 1.0F / Speed);
-			Guide.GuideTextOutput(22, Speed);
+			Guide.GuideTextOutput(22, Speed);	
+			Score[0] += 1;
+			Score[1] += 1;
 		}
 		//++When attacking the door with the shiv
 		else if(Input.GetKeyUp(KeyCode.A) &
@@ -312,7 +329,9 @@ public class GameController : MonoBehaviour {
 		        Inventory[2,1] == "yes") {
 			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
 			UI.UITextOutput(11, 1.0F / Speed);
-			Guide.GuideTextOutput(23, Speed);
+			Guide.GuideTextOutput(23, Speed);	
+			Score[0] += 1;
+			Score[1] += 1;
 		}
 		//++When yelling through the door
 		else if(Input.GetKeyUp(KeyCode.Y) &
@@ -320,7 +339,9 @@ public class GameController : MonoBehaviour {
 			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
 			UI.UITextOutput(11, 1.0F / Speed);
 			Guide.GuideTextOutput(24, Speed);
-			GuardFacing = "towards";
+			GuardFacing = "towards";	
+			Score[0] += 1;
+			Score[1] += 1;
 		}
 		//++When trying the door handle and the guard is facing away
 		else if(Input.GetKeyUp(KeyCode.L) &
@@ -329,7 +350,9 @@ public class GameController : MonoBehaviour {
 			StartCoroutine(DisablePaging(-1, 3.5F / Speed));
 			UI.UITextOutput(12, 5.0F / Speed);
 			Guide.GuideTextOutput(25, Speed);
-			CurrentState = States.Corridor;
+			CurrentState = States.Corridor;	
+			Score[0] += 0;
+			Score[1] += 2;
 		}
 		//++When trying the door handle and the guard is facing towards
 		else if(Input.GetKeyUp(KeyCode.L) &
@@ -338,7 +361,9 @@ public class GameController : MonoBehaviour {
 			StartCoroutine(DisablePaging(-1, 3.5F / Speed));
 			UI.UITextOutput(13, 5.0F / Speed);
 			Guide.GuideTextOutput(26, Speed);
-			CurrentState = States.Corridor;
+			CurrentState = States.Corridor;	
+			Score[0] += 0;
+			Score[1] += 2;
 		}
 		//++When attacking the guard WITH a weapon
 		else if(Input.GetKeyUp(KeyCode.A) &
@@ -350,7 +375,9 @@ public class GameController : MonoBehaviour {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
 			UI.UITextOutput(14, 0.0F);
 			Guide.GuideTextOutput(27, Speed);
-			CurrentState = States.Ending;
+			CurrentState = States.Ending;	
+			Score[0] += 1;
+			Score[1] += 1;
 		}
 		//++When attacking the guard WITHOUT a weapon
 		else if(Input.GetKeyUp(KeyCode.A) &
@@ -360,7 +387,9 @@ public class GameController : MonoBehaviour {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
 			UI.UITextOutput(14, 0.0F);
 			Guide.GuideTextOutput(28, Speed);
-			CurrentState = States.Ending;
+			CurrentState = States.Ending;	
+			Score[0] += 4;
+			Score[1] += 0;	
 		}
 		//++When talking to the guard while he's facing away
 		else if(Input.GetKeyUp(KeyCode.T) &
@@ -369,7 +398,9 @@ public class GameController : MonoBehaviour {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
 			UI.UITextOutput(14, 0.0F);
 			Guide.GuideTextOutput(29, Speed);
-			CurrentState = States.Ending;
+			CurrentState = States.Ending;	
+			Score[0] += 0;
+			Score[1] += 1;
 		}
 		//++When talking to the guard when he's facing towards
 		else if(Input.GetKeyUp(KeyCode.A) &
@@ -378,7 +409,9 @@ public class GameController : MonoBehaviour {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
 			UI.UITextOutput(14, 0.0F);
 			Guide.GuideTextOutput(30, Speed);
-			CurrentState = States.Ending;
+			CurrentState = States.Ending;	
+			Score[0] += 0;
+			Score[1] += 1;
 		}
 		//++When sneaking passed the guard
 		else if(Input.GetKeyUp(KeyCode.S) &
@@ -386,7 +419,9 @@ public class GameController : MonoBehaviour {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
 			UI.UITextOutput(14, 0.0F);
 			Guide.GuideTextOutput(31, Speed);
-			CurrentState = States.Ending;
+			CurrentState = States.Ending;	
+			Score[0] += 0;
+			Score[1] += 1;
 		}	
 		//++When running passed the guard
 		else if(Input.GetKeyUp(KeyCode.R) &
@@ -394,8 +429,11 @@ public class GameController : MonoBehaviour {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
 			UI.UITextOutput(14, 0.0F);
 			Guide.GuideTextOutput(32, Speed);
-			CurrentState = States.Ending;    
+			CurrentState = States.Ending;	
+			Score[0] += 0;
+			Score[1] += 1;    
 		}
+		
 	}
 	
 	//-------FUNCTIONS-------

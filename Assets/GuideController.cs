@@ -162,7 +162,7 @@ public class GuideController : MonoBehaviour {
 			break;
 			//++When trying the door handle and the guard is facing towards
 		case 26:
-			GuideText.text = "Well that's embarrasing; the door wasn't locked!";
+			GuideText.text = "Well that's embarrasing; the door wasn't locked!\n";
 			StartCoroutine(TimedText("OK, so the corridor is about as charming as the cell.\n", 1.5F / Speed));
 			StartCoroutine(TimedText("The guard is armed and he's staring right at you.\n", 2.0F / Speed));
 			StartCoroutine(TimedText("He looks really scared!", 3.0F / Speed));
