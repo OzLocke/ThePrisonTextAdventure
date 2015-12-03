@@ -365,13 +365,21 @@ public class GameController : MonoBehaviour {
 			Score[0] += 0;
 			Score[1] += 2;
 		}
-		//++When attacking the guard WITH a weapon
+		//++When attacking the guard WITH the glass
+		else if(Input.GetKeyUp(KeyCode.A) &
+		        CurrentState == States.Corridor &
+		        Inventory[1,1] == "yes") {
+			StartCoroutine(DisablePaging(4, 4.0F / Speed));
+			UI.UITextOutput(14, 0.0F);
+			Guide.GuideTextOutput(27, Speed);
+			CurrentState = States.Ending;	
+			Score[0] += 1;
+			Score[1] += 0;
+		}
+		//++When attacking the guard WITH the shiv
 		else if(Input.GetKeyUp(KeyCode.A) &
 				CurrentState == States.Corridor &
-				(
-				Inventory[1,1] == "yes" |
-				Inventory[2,1] == "yes"
-				)) {
+				Inventory[2,1] == "yes") {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
 			UI.UITextOutput(14, 0.0F);
 			Guide.GuideTextOutput(27, Speed);
