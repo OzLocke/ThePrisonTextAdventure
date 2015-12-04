@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		Speed = 2.0F;
 		CurrentState = States.Intro;	
-		Page = -1;
+		Page = 1;
 		Inventory = new string[,] {
 			{"Mouldy Sheet", "no"}
 			,{"Broken Glass", "no"}
@@ -34,6 +34,8 @@ public class GameController : MonoBehaviour {
 			,{"Door", "no"}
 		};
 		GuardFacing = "away";
+		//Score[0] = 0;
+		//Score[1] = 3;
 	}
 	
 	// Update is called once per frame
@@ -68,6 +70,8 @@ public class GameController : MonoBehaviour {
 		//++Initial introduction to the cell
 		else if(Input.GetKeyUp(KeyCode.Space) & 
 		        CurrentState != States.Cell & 
+		        CurrentState != States.Ending &
+		        CurrentState != States.End &
 		        Visited[0,1] == "no") {
 			StartCoroutine(DisablePaging(-1, 14.0F / Speed));
 			UI.UITextOutput(4, 14.0F / Speed);
@@ -123,7 +127,9 @@ public class GameController : MonoBehaviour {
 		//------------------------------------------------------		 
 		//++When returning to the cell WITHOUT the sheet and/or WITHOUT the broken glass
 		else if((Input.GetKeyUp(KeyCode.Space) | Input.GetKeyUp(KeyCode.R)) & 
-		        CurrentState != States.Cell &
+		        CurrentState != States.Cell & 
+		        CurrentState != States.Ending &
+		        CurrentState != States.End &
 		        Visited[0,1] == "yes" &
 		        (
 		        Inventory[0,1] == "no" |
@@ -370,7 +376,7 @@ public class GameController : MonoBehaviour {
 		        CurrentState == States.Corridor &
 		        Inventory[1,1] == "yes") {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(14, 0.0F);
+			UI.UITextOutput(15, 4.0F);
 			Guide.GuideTextOutput(27, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 1;
@@ -381,7 +387,7 @@ public class GameController : MonoBehaviour {
 				CurrentState == States.Corridor &
 				Inventory[2,1] == "yes") {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(14, 0.0F);
+			UI.UITextOutput(15, 4.0F);
 			Guide.GuideTextOutput(27, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 1;
@@ -393,7 +399,7 @@ public class GameController : MonoBehaviour {
 		        Inventory[1,1] == "no" &
 				Inventory[2,1] == "no") {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(14, 0.0F);
+			UI.UITextOutput(15, 4.0F);
 			Guide.GuideTextOutput(28, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 4;
@@ -404,7 +410,7 @@ public class GameController : MonoBehaviour {
 		        CurrentState == States.Corridor &
 		        GuardFacing == "away") {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(14, 0.0F);
+			UI.UITextOutput(15, 4.0F);
 			Guide.GuideTextOutput(29, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 0;
@@ -415,7 +421,7 @@ public class GameController : MonoBehaviour {
 		        CurrentState == States.Corridor &
 		        GuardFacing == "towards") {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(14, 0.0F);
+			UI.UITextOutput(15, 4.0F);
 			Guide.GuideTextOutput(30, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 0;
@@ -425,7 +431,7 @@ public class GameController : MonoBehaviour {
 		else if(Input.GetKeyUp(KeyCode.S) &
 		        CurrentState == States.Corridor) {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(14, 0.0F);
+			UI.UITextOutput(14, 4.0F);
 			Guide.GuideTextOutput(31, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 0;
@@ -435,11 +441,60 @@ public class GameController : MonoBehaviour {
 		else if(Input.GetKeyUp(KeyCode.R) &
 		        CurrentState == States.Corridor) {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(14, 0.0F);
+			UI.UITextOutput(15, 4.0F);
 			Guide.GuideTextOutput(32, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 0;
 			Score[1] += 1;    
+		}
+		
+		//------------------------------------------------------
+		//---------------------ENDING PAGES---------------------
+		//------------------------------------------------------
+		//++Easter Egg Ending
+		else if(Input.GetKeyUp(KeyCode.Space) &
+				CurrentState == States.Ending &
+				Score[0] == 0 &
+				Score[1] == 3){
+			StartCoroutine(DisablePaging(4, 4.0F / Speed));
+			UI.UITextOutput(16, 4.0F);
+			Guide.GuideTextOutput(33, Speed);
+			CurrentState = States.End;	
+		}
+		//++Ending 1 - Violent
+		else if(Input.GetKeyUp(KeyCode.Space) &
+		        CurrentState == States.Ending &
+		        Score[0] > 7 &
+		        Score[1] <= 7){
+			StartCoroutine(DisablePaging(4, 4.0F / Speed));
+			UI.UITextOutput(16, 4.0F);
+			Guide.GuideTextOutput(34, Speed);
+			CurrentState = States.End;	
+		}
+		//++Ending 2 - Smart
+		else if(Input.GetKeyUp(KeyCode.Space) &
+		        CurrentState == States.Ending &
+		        Score[0] <=7 &
+		        Score[1] >7){
+			StartCoroutine(DisablePaging(4, 4.0F / Speed));
+			UI.UITextOutput(16, 4.0F);
+			Guide.GuideTextOutput(35, Speed);
+			CurrentState = States.End;	
+		}
+		//++Ending 3 - Useless
+		else if(Input.GetKeyUp(KeyCode.Space) &
+		        CurrentState == States.Ending &
+		        (Score[0] > 7 & Score[1] > 7 |
+				Score[0] <= 7 & Score[1] <= 7)){
+			StartCoroutine(DisablePaging(4, 4.0F / Speed));
+			UI.UITextOutput(16, 4.0F);
+			Guide.GuideTextOutput(36, Speed);
+			CurrentState = States.End;	
+		}
+		//++Restart game
+		else if(Input.GetKeyUp(KeyCode.Space) &
+				CurrentState == States.End){
+			Application.LoadLevel(0);				
 		}
 		
 	}

@@ -83,6 +83,20 @@ public class UIController : MonoBehaviour {
 		case 14:
 			UIText.text = "";
 			break;
+			
+			//------------------------------------------------------
+			//--------------------ENDING ACTIONS--------------------
+			//------------------------------------------------------
+			//++To receive final score
+		case 15:
+			UIText.text = "";
+			StartCoroutine(TimedText("Press <b>Space</b> to continue", WaitTime));
+			break;
+			//++To restart the game
+		case 16:
+			UIText.text = "";
+			StartCoroutine(TimedText("<color=aqua>Press <b>Space</b> to proceed to next subject</color>", WaitTime));
+			break;
 		}
 	}
 	
