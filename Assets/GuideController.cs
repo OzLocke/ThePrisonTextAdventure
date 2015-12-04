@@ -42,7 +42,7 @@ public class GuideController : MonoBehaviour {
 			StartCoroutine(TimedText("OK, here's the situation:\n", 1.5F / Speed));
 			StartCoroutine(TimedText("You're in one of their cells, proper Dank Dungeon sort of place.\n", 3.0F / Speed));
 			StartCoroutine(TimedText("The bed you're lying on has a sheet on it but it's kind of... mouldy.\n", 6.0F / Speed));
-			StartCoroutine(TimedText("Uh... nothing else here but a broken mirrror and...\n", 9.0F / Speed));
+			StartCoroutine(TimedText("Uh... nothing else here but a broken mirror and...\n", 9.0F / Speed));
 			StartCoroutine(TimedText("And the door, I guess. But it's locked so why count it, right?\n", 10.5F / Speed));
 			StartCoroutine(TimedText("Right?", 12.5F / Speed));
 			break;
@@ -155,14 +155,14 @@ public class GuideController : MonoBehaviour {
 			break;
 			//++When trying the door handle and the guard is facing away
 		case 25:
-			GuideText.text = "Well that's embarrasing; the door wasn't locked!\n";
+			GuideText.text = "Well that's embarrassing; the door wasn't locked!\n";
 			StartCoroutine(TimedText("OK, so the corridor is about as charming as the cell.\n", 1.5F / Speed));
 			StartCoroutine(TimedText("The guard is armed and he's got his back to you.\n", 2.0F / Speed));
 			StartCoroutine(TimedText("Shameful that he hasn't noticed you really.", 3.0F / Speed));
 			break;
 			//++When trying the door handle and the guard is facing towards
 		case 26:
-			GuideText.text = "Well that's embarrasing; the door wasn't locked!\n";
+			GuideText.text = "Well that's embarrassing; the door wasn't locked!\n";
 			StartCoroutine(TimedText("OK, so the corridor is about as charming as the cell.\n", 1.5F / Speed));
 			StartCoroutine(TimedText("The guard is armed and he's staring right at you.\n", 2.0F / Speed));
 			StartCoroutine(TimedText("He looks really scared!", 3.0F / Speed));
@@ -189,8 +189,47 @@ public class GuideController : MonoBehaviour {
 			break;		
 			//++When running passed the guard
 		case 32:
-			GuideText.text = "That's not exactly runnning, more like shuffling... And he's caught you.";
-			break;		
+			GuideText.text = "That's not exactly running, more like shuffling... And he's caught you.";
+			break;	
+			
+			//------------------------------------------------------
+			//----------------------Endings-------------------------
+			//------------------------------------------------------	
+			//++Easter Egg Ending
+		case 33:
+			GuideText.text = "Oh what the hell?!\n";
+			StartCoroutine(TimedText("Jo, one of the janitors fell asleep in the specimen cell again.\n", 1.5F / Speed)); 
+			StartCoroutine(TimedText("You, I'm reporting you to your supervisor,\n", 3.0F / Speed));
+			StartCoroutine(TimedText("don't you know how dangerous these things are?\n", 3.5F / Speed));
+			StartCoroutine(TimedText("ReLife Inc. has no use for Darwin Award winners.", 4.5F / Speed));
+			break;
+			//++Ending 1 - Violent
+		case 34:
+			GuideText.text = "<color=orange>Congratulations, Subject, on completing the ReLife Reanimate Rehabilitation exam.</color>\n";
+			StartCoroutine(TimedText("<color=orange>While all reanimates are dangerous, your exceptionally violent nature</color>\n", 1.5F / Speed));
+			StartCoroutine(TimedText("<color=orange>shows that you are a perfect candidate for our MRR scheme.</color>\n", 2.0F / Speed));
+			StartCoroutine(TimedText("<color=orange>Military Recruitment of Reanimates.</color>\n", 2.5F / Speed));
+			StartCoroutine(TimedText("<color=orange>That's right, lucky you, you're going to help reclaim your contry!</color>\n", 3.0F / Speed));
+			StartCoroutine(TimedText("<color=cyan><i>ReLife, turning the zombie apocalypse into a new opportunity, for you!</i></color>\n", 4.5F / Speed));
+			break;
+			//++Ending 2 - Smart
+		case 35:
+			GuideText.text = "<color=orange>Congratulations, Subject, on completing the ReLife Reanimate Rehabilitation exam.</color>\n";
+			StartCoroutine(TimedText("<color=orange>Few reanimates are intelligent, and you're one of those few!</color>\n", 1.5F / Speed));
+			StartCoroutine(TimedText("<color=orange>That's why you will be moved to our RSSS scheme.</color>\n", 2.0F / Speed));
+			StartCoroutine(TimedText("<color=orange>Reanimate Service, Supply and Support.</color>\n", 2.5F / Speed));
+			StartCoroutine(TimedText("<color=orange>That's right, lucky you, you're going to work for a living!</color>\n", 3.0F / Speed));
+			StartCoroutine(TimedText("<color=cyan><i>ReLife, turning the zombie apocalypse into a new opportunity, for you!</i></color>\n", 4.5F / Speed));
+			break;
+			//++Ending 3 - Useless
+		case 36:
+			GuideText.text = "<color=orange>Congratulations, Subject, on completing the ReLife Reanimate Rehabilitation exam.</color>\n";
+			StartCoroutine(TimedText("<color=orange>While reanimates can be smart or deadly, most are just plain hazardous.</color>\n", 1.5F / Speed));
+			StartCoroutine(TimedText("<color=orange>Sadly, you fit into this category, and so must be classed as unusable.</color>\n", 2.0F / Speed));
+			StartCoroutine(TimedText("<color=orange>As such we will now destroy you, and hope that your successor is a better subject.</color>\n", 2.5F / Speed));
+			StartCoroutine(TimedText("<color=orange>That's right, lucky you, you get to die... again!</color>\n", 3.0F / Speed));
+			StartCoroutine(TimedText("<color=cyan><i>ReLife, turning the zombie apocalypse into a new opportunity, for you!</i></color>\n", 4.5F / Speed));
+			break;
 		}
 	}
 	
