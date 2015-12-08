@@ -7,4 +7,4 @@ This repo is for a simple game being developed as part of the Udemy Unity course
 I have gone away from the basic structure ebnough to need source control for the project
 
 ## Current State
-The game is incomplete, but all of the framework has been built and the majority of the work now involved should be on fleshing out the story and gameplay
+The game is complete. All that remains is testing, confirming scoring and endings work, and checking the text flow speed.
