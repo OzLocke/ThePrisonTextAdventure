@@ -298,15 +298,6 @@ public class GameController : MonoBehaviour {
 			Score[0] += 1;
 			Score[1] += 2;
 		}
-		//++When pushing the door
-		else if(Input.GetKeyUp(KeyCode.P) &
-		        CurrentState == States.Door) {
-			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
-			UI.UITextOutput(11, 1.0F / Speed);
-			Guide.GuideTextOutput(20, Speed);	
-			Score[0] += 0;
-			Score[1] += 0;
-		}
 		//++When attacking the door bare handed
 		else if(Input.GetKeyUp(KeyCode.A) &
 		        CurrentState == States.Door &
@@ -349,6 +340,28 @@ public class GameController : MonoBehaviour {
 			Score[0] += 1;
 			Score[1] += 1;
 		}
+		//++When forcing the door and the guard is facing away
+		else if(Input.GetKeyUp(KeyCode.P) &
+		        CurrentState == States.Door &
+		        GuardFacing == "away") {
+			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
+			UI.UITextOutput(12, 5.0F / Speed);
+			Guide.GuideTextOutput(25, Speed);
+			CurrentState = States.Corridor;		
+			Score[0] += 2;
+			Score[1] += 0;
+		}
+		//++When forcing the door and the guard is facing towards
+		else if(Input.GetKeyUp(KeyCode.P) &
+		        CurrentState == States.Door &
+		        GuardFacing == "towards") {
+			StartCoroutine(DisablePaging(-1, 1.0F / Speed));
+			UI.UITextOutput(13, 5.0F / Speed);
+			Guide.GuideTextOutput(26, Speed);	
+			CurrentState = States.Corridor;	
+			Score[0] += 2;
+			Score[1] += 0;
+		}
 		//++When trying the door handle and the guard is facing away
 		else if(Input.GetKeyUp(KeyCode.L) &
 		        CurrentState == States.Door &
@@ -371,12 +384,13 @@ public class GameController : MonoBehaviour {
 			Score[0] += 0;
 			Score[1] += 2;
 		}
+		//-----FINAL STAGE ACTIONS, only one can be chosen per game
 		//++When attacking the guard WITH the glass
 		else if(Input.GetKeyUp(KeyCode.A) &
 		        CurrentState == States.Corridor &
 		        Inventory[1,1] == "yes") {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(15, 4.0F);
+			UI.UITextOutput(15, 1.0F);
 			Guide.GuideTextOutput(27, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 1;
@@ -387,7 +401,7 @@ public class GameController : MonoBehaviour {
 				CurrentState == States.Corridor &
 				Inventory[2,1] == "yes") {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(15, 4.0F);
+			UI.UITextOutput(15, 1.0F);
 			Guide.GuideTextOutput(27, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 1;
@@ -399,7 +413,7 @@ public class GameController : MonoBehaviour {
 		        Inventory[1,1] == "no" &
 				Inventory[2,1] == "no") {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(15, 4.0F);
+			UI.UITextOutput(15, 1.0F);
 			Guide.GuideTextOutput(28, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 4;
@@ -410,7 +424,7 @@ public class GameController : MonoBehaviour {
 		        CurrentState == States.Corridor &
 		        GuardFacing == "away") {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(15, 4.0F);
+			UI.UITextOutput(15, 1.0F);
 			Guide.GuideTextOutput(29, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 0;
@@ -421,7 +435,7 @@ public class GameController : MonoBehaviour {
 		        CurrentState == States.Corridor &
 		        GuardFacing == "towards") {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(15, 4.0F);
+			UI.UITextOutput(15, 1.0F);
 			Guide.GuideTextOutput(30, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 0;
@@ -431,7 +445,7 @@ public class GameController : MonoBehaviour {
 		else if(Input.GetKeyUp(KeyCode.S) &
 		        CurrentState == States.Corridor) {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(14, 4.0F);
+			UI.UITextOutput(15, 1.0F);
 			Guide.GuideTextOutput(31, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 0;
@@ -441,7 +455,7 @@ public class GameController : MonoBehaviour {
 		else if(Input.GetKeyUp(KeyCode.R) &
 		        CurrentState == States.Corridor) {
 			StartCoroutine(DisablePaging(4, 4.0F / Speed));
-			UI.UITextOutput(15, 4.0F);
+			UI.UITextOutput(15, 1.0F);
 			Guide.GuideTextOutput(32, Speed);
 			CurrentState = States.Ending;	
 			Score[0] += 0;

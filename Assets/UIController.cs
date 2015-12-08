@@ -67,7 +67,7 @@ public class UIController : MonoBehaviour {
 			//++When at the door
 		case 11:
 			UIText.text = "";
-			StartCoroutine(TimedText("Press <b>P</b> to push the door\nPress <b>L</b> to try the lock\nPress <b>A</b> to attack\n" +
+			StartCoroutine(TimedText("Press <b>F</b> to force the door\nPress <b>L</b> to try the lock\nPress <b>A</b> to attack\n" +
 									 "Press <b>Y</b> to yell\nPress <b>R</b> to return", WaitTime));
 			break;
 			//++When trying the door handle and the guard is facing away
