@@ -64,10 +64,10 @@ public class GuideController : MonoBehaviour {
 			StartCoroutine(TimedText("You could take it...\n", 2.0F / Speed));
 			StartCoroutine(TimedText("Carefully.", 3.0F / Speed));
 			break;
-			//++Initial visit to the door WITHOUT the broken glass, sheet or shiv
+			//++Initial visit to the door
 		case 18:
 			GuideText.text = "It's kind of what you'd expect from a cell door: heavy and ugly.\n";
-			StartCoroutine(TimedText("It's made of solid wood, no window, not even bars...\n", 1.5F / Speed));
+			StartCoroutine(TimedText("It's made of solid metal, no window, not even bars...\n", 1.5F / Speed));
 			StartCoroutine(TimedText("You're not getting out of here any time soon.\n", 3.5F / Speed));
 			StartCoroutine(TimedText("Wait...\n", 4.0F / Speed));
 			StartCoroutine(TimedText("...\n", 4.25F / Speed));
@@ -206,10 +206,10 @@ public class GuideController : MonoBehaviour {
 			//++Ending 1 - Violent
 		case 34:
 			GuideText.text = "<color=orange>Congratulations, Subject, on completing the ReLife Reanimate Rehabilitation exam.</color>\n";
-			StartCoroutine(TimedText("<color=orange>While all reanimates are dangerous, your exceptionally violent nature</color>\n", 1.5F / Speed));
+			StartCoroutine(TimedText("<color=orange>While all reanimates are dangerous your exceptionally violent nature</color>\n", 1.5F / Speed));
 			StartCoroutine(TimedText("<color=orange>shows that you are a perfect candidate for our MRR scheme.</color>\n", 2.0F / Speed));
 			StartCoroutine(TimedText("<color=orange>Military Recruitment of Reanimates.</color>\n", 2.5F / Speed));
-			StartCoroutine(TimedText("<color=orange>That's right, lucky you, you're going to help reclaim your contry!</color>\n", 3.0F / Speed));
+			StartCoroutine(TimedText("<color=orange>That's right, lucky you, you're going to help reclaim your country!</color>\n", 3.0F / Speed));
 			StartCoroutine(TimedText("<color=cyan><i>ReLife, turning the zombie apocalypse into a new opportunity, for you!</i></color>\n", 4.5F / Speed));
 			break;
 			//++Ending 2 - Smart
